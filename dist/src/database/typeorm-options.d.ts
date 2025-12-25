@@ -1,0 +1,16 @@
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DataSourceOptions } from 'typeorm';
+import { Blockchain } from '../modules/blockchain/blockchain.entity';
+import { Currency } from '../modules/currency/currency.entity';
+import { Provider } from '../modules/provider/provider.entity';
+import { Setting } from '../modules/setting/setting.entity';
+import { User } from '../modules/user/user.entity';
+import { BlockHistory } from '../modules/wallet/block-history.entity';
+import { FeeInventory } from '../modules/wallet/fee-inventory.entity';
+import { Revenue } from '../modules/wallet/revenue.entity';
+import { Transaction } from '../modules/wallet/transaction.entity';
+import { WalletBalance } from '../modules/wallet/wallet-balance.entity';
+import { Wallet } from '../modules/wallet/wallet.entity';
+export declare const ormEntities: readonly [typeof Blockchain, typeof Currency, typeof Setting, typeof User, typeof Wallet, typeof WalletBalance, typeof Transaction, typeof BlockHistory, typeof FeeInventory, typeof Revenue, typeof Provider];
+export declare const typeOrmOptions: () => TypeOrmModuleOptions;
+export declare const typeOrmDataSourceOptions: () => DataSourceOptions;

@@ -1,0 +1,41 @@
+import { Repository } from 'typeorm';
+import { Blockchain } from '../blockchain/blockchain.entity';
+import { Currency } from '../currency/currency.entity';
+import { SettingService } from '../setting/setting.service';
+import { PriceService } from '../price/price.service';
+import { Transaction } from './transaction.entity';
+import { Wallet } from './wallet.entity';
+import { ConfigService } from '@nestjs/config';
+import { ProviderService } from '../provider/provider.service';
+import { TransactionService } from './transaction.service';
+import { WalletBalance } from './wallet-balance.entity';
+export declare class WalletTaskService {
+    private readonly transactionRepo;
+    private readonly walletRepo;
+    private readonly currencyRepo;
+    private readonly blockchainRepo;
+    private readonly balanceRepo;
+    private readonly settingService;
+    private readonly priceService;
+    private readonly configService;
+    private readonly providerService;
+    private readonly transactionService;
+    private readonly logger;
+    constructor(transactionRepo: Repository<Transaction>, walletRepo: Repository<Wallet>, currencyRepo: Repository<Currency>, blockchainRepo: Repository<Blockchain>, balanceRepo: Repository<WalletBalance>, settingService: SettingService, priceService: PriceService, configService: ConfigService, providerService: ProviderService, transactionService: TransactionService);
+    getWithdrawalWallet(blockchainName: string, amount: number, currencySymbol: string): Promise<{
+        publicKey: string | undefined;
+        privateKey: string | undefined;
+    }>;
+    balanceCollectorTask(): Promise<void>;
+    processWithdrawals(): Promise<void>;
+    checkTransactionStatus(): Promise<void>;
+    private getEvmTransactionStatusInfo;
+    private getTronTransactionStatusInfo;
+    private getBtcLtcTransactionStatusInfo;
+    private getXrpTransactionStatusInfo;
+    transferToSafeWallet(wallet: Wallet, currency: Currency, amount: number): Promise<void>;
+    private checkNeedsNetworkFee;
+    payFeeAutomatic(blockchainName: string, recipientAddress: string): Promise<string | undefined>;
+    private sendEvmTransaction;
+    private sendTronTransaction;
+}
